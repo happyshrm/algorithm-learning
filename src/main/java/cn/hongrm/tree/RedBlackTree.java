@@ -44,10 +44,13 @@ public class RedBlackTree<T extends Comparable> {
         if (cmp < 0) h.left = put(h.left, key, value);
         else if (cmp > 0) h.right = put(h.right, key, value);
         else h.value = value;
-        //左边连续两个链接都是红色链接
-        if (isRed(h.left) && isRed(h.left.left)) h = rotateRight(h);
+
         //红色的右链接转为红色的左链接
         if (!isRed(h.left) && isRed(h.right)) h = rotateLeft(h);
+
+        //左边连续两个链接都是红色链接
+        if (isRed(h.left) && isRed(h.left.left)) h = rotateRight(h);
+
         //左右子链接都是红色链接
         if (isRed(h.left) && isRed(h.right)) flipColors(h);
 
